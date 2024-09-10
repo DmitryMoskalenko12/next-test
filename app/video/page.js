@@ -1,13 +1,11 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
 import { redirect } from 'next/navigation';
 import { Suspense } from 'react';
 
 export default function VideoPage() {
   const [hasAccess, setHasAccess] = useState(false);
-  const searchParams = useSearchParams();
-  const orderReference = searchParams.get('orderReference');
+  const orderReference = new URL(location.href).searchParams.get('orderReference');
 
   useEffect(() => {
     const checkPayment = async () => {
