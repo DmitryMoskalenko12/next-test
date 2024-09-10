@@ -7,7 +7,7 @@ export default async function handler(req, res) {
   
       // Проверка статуса платежа
       if (data.status === 'Approved') {
-         
+         redirect('/success')
         // Можно обновить статус заказа в базе данных
       } else {
       
