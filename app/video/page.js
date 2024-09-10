@@ -32,7 +32,7 @@ export default function VideoPage() {
     if (orderReference) {
       checkPayment();
     }
-  }, [orderReference, router]);
+  }, [orderReference]);
 
   return (
     <Suspense fallback={<div>Loading video...</div>}>
