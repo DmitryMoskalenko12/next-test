@@ -7,9 +7,9 @@ export default async function TrainingPage() {
   
   const result = await verifyAuth();
 
-  if (!result.user) {
+/*   if (!result.user) {
     return redirect('/')
-  }
+  } */
   
   return (
     <main>
