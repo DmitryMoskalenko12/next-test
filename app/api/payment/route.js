@@ -1,21 +1,23 @@
 import { redirect } from "next/navigation";
 
-export default async function handler(req, res) {
-    if (req.method === 'POST') {
-      const data = req.body;
-  
-      // Проверка статуса платежа
-      if (data.status === 'Approved') {
-         redirect('/success')
-        // Можно обновить статус заказа в базе данных
-      } else {
-      
-      }
-  
-      // Ответ WayForPay
-      res.status(200).json({ status: 'success' });
-    } else {
-      // Если метод не POST
-      res.status(405).json({ message: 'Method Not Allowed' });
+import { NextResponse } from 'next/server';
+
+export async function POST(request) {
+  const origin = request.headers.get('origin');
+
+  if (origin === 'https://secure.wayforpay.com') {
+    const body = await request.json();
+
+    if (body.status === 'Approved') {
+
+      console.log('Payment Approved:', body);
     }
+
+    const response = NextResponse.json({ status: 'success' });
+    response.headers.set('Access-Control-Allow-Origin', 'https://secure.wayforpay.com');
+    response.headers.set('Access-Control-Allow-Methods', 'POST');
+    return response;
   }
+
+  return NextResponse.json({ status: 'error', message: 'Unauthorized' });
+}
