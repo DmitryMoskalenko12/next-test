@@ -1,5 +1,4 @@
 import { redirect } from "next/navigation";
-import { NextResponse } from 'next/server';
 
 export default async function handler(req, res) {
     if (req.method === 'POST') {
@@ -14,9 +13,9 @@ export default async function handler(req, res) {
       }
   
       // Ответ WayForPay
-      return NextResponse.json({ status: 'success' });
+      res.status(200).json({ status: 'success' });
     } else {
       // Если метод не POST
-      return NextResponse.json({ status: 'error', message: error.message });
+      res.status(405).json({ message: 'Method Not Allowed' });
     }
   }
