@@ -11,6 +11,8 @@ export async function POST(request) {
     if (body.status === 'Approved') {
 
       console.log('Payment Approved:', body);
+    } else {
+      redirect('/failed')
     }
 
     const response = NextResponse.json({ status: 'success' });
