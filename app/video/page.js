@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { redirect } from 'next/navigation';
-
+import { Suspense } from 'react';
 
 export default function VideoPage() {
   const [hasAccess, setHasAccess] = useState(false);
@@ -37,12 +37,12 @@ export default function VideoPage() {
   }, [orderReference, router]);
 
   return (
-    <div>
+    <Suspense fallback={<div>Loading video...</div>}>
       {hasAccess ? (
-        <video controls src={'/video/bgVideo.mp4'} />
+        <video controls src="/path-to-your-video.mp4" />
       ) : (
         <p>Checking payment status...</p>
       )}
-    </div>
+    </Suspense>
   );
 }
