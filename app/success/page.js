@@ -1,7 +1,7 @@
 'use client'
-const Success = ({ searchParams }) => {
-    
-    console.log(searchParams);
+
+const Success = async ({ searchParams }) => {
+
 
     return <>
         <div style={{textAlign: 'center'}}>
