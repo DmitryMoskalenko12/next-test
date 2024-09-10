@@ -5,7 +5,7 @@ import { Suspense } from 'react';
 
 export default function VideoPage() {
   const [hasAccess, setHasAccess] = useState(false);
-  const orderReference = new URL(location.href).searchParams.get('orderReference');
+  const orderReference = new URL(window.location.href).searchParams.get('orderReference');
 
   useEffect(() => {
     const checkPayment = async () => {
