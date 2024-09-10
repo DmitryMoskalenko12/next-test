@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { redirect } from 'next/navigation';
-import video from '@/video/bgVideo.mp4';
+
 
 export default function VideoPage() {
   const [hasAccess, setHasAccess] = useState(false);
@@ -39,7 +39,7 @@ export default function VideoPage() {
   return (
     <div>
       {hasAccess ? (
-        <video controls src={video} />
+        <video controls src={'/video/bgVideo.mp4'} />
       ) : (
         <p>Checking payment status...</p>
       )}
