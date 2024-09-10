@@ -1,11 +1,12 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { useSearchParams, useRouter } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
+import { redirect } from 'next/navigation';
+import video from '@/video/bgVideo.mp4';
 
 export default function VideoPage() {
   const [hasAccess, setHasAccess] = useState(false);
   const searchParams = useSearchParams();
-  const router = useRouter();
   const orderReference = searchParams.get('orderReference');
 
   useEffect(() => {
@@ -22,11 +23,11 @@ export default function VideoPage() {
         if (data.success) {
           setHasAccess(true);
         } else {
-          router.push('/');
+          redirect('/');
         }
       } catch (error) {
         console.error('Payment check failed', error);
-        router.push('/');
+        redirect('/')
       }
     };
 
@@ -38,7 +39,7 @@ export default function VideoPage() {
   return (
     <div>
       {hasAccess ? (
-        <video controls src="/video/bgVideo.mp4" />
+        <video controls src={video} />
       ) : (
         <p>Checking payment status...</p>
       )}
