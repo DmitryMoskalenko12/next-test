@@ -5,7 +5,12 @@ import { Suspense } from 'react';
 
 export default function VideoPage() {
   const [hasAccess, setHasAccess] = useState(false);
-  const orderReference = new URL(window.location.href).searchParams.get('orderReference');
+  const [href, setHref] = useState('');
+
+  useEffect(() => {
+    const orderReference = new URL(window.location.href).searchParams.get('orderReference');
+    setHref(orderReference);
+  }, []);
 
   useEffect(() => {
     const checkPayment = async () => {
@@ -13,7 +18,7 @@ export default function VideoPage() {
         const res = await fetch('/api/payment-status', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ orderReference }),
+          body: JSON.stringify({ href }),
         });
 
         const data = await res.json();
@@ -29,10 +34,10 @@ export default function VideoPage() {
       }
     };
 
-    if (orderReference) {
+    if (href) {
       checkPayment();
     }
-  }, [orderReference]);
+  }, [href]);
 
   return (
     <Suspense fallback={<div>Loading video...</div>}>
